@@ -1,7 +1,4 @@
 # coding=utf-8
-from __future__ import absolute_import, division, print_function, \
-    unicode_literals
-
 from typing import Any
 
 from class_registry.registry import MutableRegistry, RegistryKeyError
