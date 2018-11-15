@@ -9,7 +9,6 @@ from inspect import isclass as is_class
 from typing import Any, Callable, Generator, Hashable, Iterator, \
     Mapping, MutableMapping, Optional, Text, Tuple, Union
 
-from six import PY2, iteritems, with_metaclass
 
 __all__ = [
     'BaseRegistry',
@@ -30,7 +29,7 @@ class RegistryKeyError(KeyError):
     pass
 
 
-class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
+class BaseRegistry(Mapping, metaclass=ABCMeta):
     """
     Base functionality for registries.
     """
@@ -182,32 +181,8 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
         for item in self.items():
             yield item[1]
 
-    # Add some compatibility aliases to make class registries behave
-    # more like dicts in Python 2.
-    if PY2:
-        def iteritems(self):
-            """
-            Included for compatibility with :py:data:`six.iteritems`.
-            Do not invoke directly!
-            """
-            return self.items()
 
-        def iterkeys(self):
-            """
-            Included for compatibility with :py:data:`six.iterkeys`.
-            Do not invoke directly!
-            """
-            return self.keys()
-
-        def itervalues(self):
-            """
-            Included for compatibility with :py:data:`six.itervalues`.
-            Do not invoke directly!
-            """
-            return self.values()
-
-
-class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
+class MutableRegistry(BaseRegistry, MutableMapping, metaclass=ABCMeta):
     """
     Extends :py:class:`BaseRegistry` with methods that can be used to
     modify the registered classes.
@@ -373,7 +348,7 @@ class ClassRegistry(MutableRegistry):
         Iterates over all registered classes, in the order they were
         added.
         """
-        return iteritems(self._registry)
+        return self._registry.items()
 
     def _register(self, key, class_):
         # type: (Hashable, type) -> None
@@ -457,9 +432,9 @@ class SortedClassRegistry(ClassRegistry):
     def items(self):
         # type: () -> Iterator[Tuple[Hashable, type]]
         return sorted(
-            iteritems(self._registry),
-                key     = self._sort_key,
-                reverse = self.reverse,
+            self._registry.items(),
+            key=self._sort_key,
+            reverse=self.reverse,
         )
 
     @staticmethod

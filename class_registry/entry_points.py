@@ -5,7 +5,6 @@ from __future__ import absolute_import, division, print_function, \
 from typing import Dict, Optional, Text
 
 from pkg_resources import iter_entry_points
-from six import iteritems
 
 from class_registry import BaseRegistry
 
@@ -79,7 +78,7 @@ class EntryPointClassRegistry(BaseRegistry):
         return cls
 
     def items(self):
-        return iteritems(self._get_cache())
+        return self._get_cache().items()
 
     def refresh(self):
         """

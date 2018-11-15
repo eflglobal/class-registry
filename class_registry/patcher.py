@@ -4,8 +4,6 @@ from __future__ import absolute_import, division, print_function, \
 
 from typing import Any
 
-from six import iteritems
-
 from class_registry.registry import MutableRegistry, RegistryKeyError
 
 __all__ = [
@@ -75,7 +73,7 @@ class RegistryPatcher(object):
         }
 
         # Patch values.
-        for key, value in iteritems(self._new_values):
+        for key, value in self._new_values.items():
             # Remove the existing value first (prevents issues if the
             # registry has ``unique=True``).
             self._del_value(key)
@@ -88,7 +86,7 @@ class RegistryPatcher(object):
         Restores previous settings.
         """
         # Restore previous settings.
-        for key, value in iteritems(self._prev_values):
+        for key, value in self._prev_values.items():
             # Remove the existing value first (prevents issues if the
             # registry has ``unique=True``).
             self._del_value(key)

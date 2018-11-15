@@ -5,8 +5,6 @@ from __future__ import absolute_import, division, print_function, \
 from collections import defaultdict
 from typing import Any, Dict, Generator, Hashable
 
-from six import iterkeys
-
 from class_registry import ClassRegistry
 
 __all__ = [
@@ -82,7 +80,7 @@ class ClassRegistryInstanceCache(object):
 
         If a key has not been accessed yet, it will not be included.
         """
-        for lookup_key in iterkeys(self._registry):
+        for lookup_key in self._registry.keys():
             for cache_key in self._key_map[lookup_key]:
                 yield self._cache[cache_key]
 
@@ -94,7 +92,7 @@ class ClassRegistryInstanceCache(object):
         Note that this method does not account for any classes that may
         be added to the wrapped ClassRegistry in the future.
         """
-        for key in iterkeys(self._registry):
+        for key in self._registry.keys():
             self.__getitem__(key)
 
     def get_instance_key(self, key):

@@ -5,8 +5,6 @@ from __future__ import absolute_import, division, print_function, \
 from abc import ABCMeta, abstractmethod as abstract_method
 from unittest import TestCase
 
-from six import with_metaclass
-
 from class_registry import AutoRegister, ClassRegistry
 
 
@@ -19,7 +17,7 @@ class AutoRegisterTestCase(TestCase):
 
         # Note that we declare :py:func:`AutoRegister` as the metaclass
         # for our base class.
-        class BasePokemon(with_metaclass(AutoRegister(registry))):
+        class BasePokemon(metaclass=AutoRegister(registry)):
             """
             Abstract base class; will not get registered.
             """
@@ -38,7 +36,7 @@ class AutoRegisterTestCase(TestCase):
                 return ['sand veil']
 
         # noinspection PyClassHasNoInit
-        class BaseEvolvingPokemon(with_metaclass(ABCMeta, BasePokemon)):
+        class BaseEvolvingPokemon(BasePokemon, metaclass=ABCMeta):
             """
             Abstract subclass; will not get registered.
             """
@@ -77,7 +75,7 @@ class AutoRegisterTestCase(TestCase):
         """
         registry = ClassRegistry(attr_name='element')
 
-        class FightingPokemon(with_metaclass(AutoRegister(registry))):
+        class FightingPokemon(metaclass=AutoRegister(registry)):
             element = 'fighting'
 
         self.assertListEqual(
