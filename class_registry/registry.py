@@ -9,7 +9,7 @@ from inspect import isclass as is_class
 from typing import Any, Callable, Generator, Hashable, Iterator, \
     Mapping, MutableMapping, Optional, Text, Tuple, Union
 
-from six import PY2, iteritems, with_metaclass
+import six
 
 __all__ = [
     'BaseRegistry',
@@ -30,7 +30,8 @@ class RegistryKeyError(KeyError):
     pass
 
 
-class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
+@six.add_metaclass(ABCMeta)
+class BaseRegistry(Mapping):
     """
     Base functionality for registries.
     """
@@ -184,7 +185,7 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
 
     # Add some compatibility aliases to make class registries behave
     # more like dicts in Python 2.
-    if PY2:
+    if six.PY2:
         def iteritems(self):
             """
             Included for compatibility with :py:data:`six.iteritems`.
@@ -207,7 +208,8 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
             return self.values()
 
 
-class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
+@six.add_metaclass(ABCMeta)
+class MutableRegistry(BaseRegistry, MutableMapping):
     """
     Extends :py:class:`BaseRegistry` with methods that can be used to
     modify the registered classes.
@@ -373,7 +375,7 @@ class ClassRegistry(MutableRegistry):
         Iterates over all registered classes, in the order they were
         added.
         """
-        return iteritems(self._registry)
+        return six.iteritems(self._registry)
 
     def _register(self, key, class_):
         # type: (Hashable, type) -> None
@@ -457,7 +459,7 @@ class SortedClassRegistry(ClassRegistry):
     def items(self):
         # type: () -> Iterator[Tuple[Hashable, type]]
         return sorted(
-            iteritems(self._registry),
+            six.iteritems(self._registry),
                 key     = self._sort_key,
                 reverse = self.reverse,
         )
