@@ -1,15 +1,14 @@
 # coding=utf-8
-from __future__ import absolute_import, division, print_function, \
-    unicode_literals
+from __future__ import (absolute_import, division, print_function, unicode_literals)
 
-from abc import ABCMeta, abstractmethod as abstract_method
+from abc import ABCMeta
+from abc import abstractmethod as abstract_method
 from collections import OrderedDict
 from functools import cmp_to_key
 from inspect import isclass as is_class
-from typing import Any, Callable, Generator, Hashable, Iterator, \
-    Mapping, MutableMapping, Optional, Text, Tuple, Union
+from typing import Mapping, MutableMapping
 
-from six import PY2, iteritems, with_metaclass
+import six
 
 __all__ = [
     'BaseRegistry',
@@ -30,10 +29,12 @@ class RegistryKeyError(KeyError):
     pass
 
 
-class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
+@six.add_metaclass(ABCMeta)
+class BaseRegistry(Mapping):
     """
     Base functionality for registries.
     """
+
     def __contains__(self, key):
         """
         Returns whether the specified key is registered.
@@ -71,9 +72,7 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
         """
         Returns the number of registered classes.
         """
-        raise NotImplementedError(
-            'Not implemented in {cls}.'.format(cls=type(self).__name__),
-        )
+        raise NotImplementedError('Not implemented in {cls}.'.format(cls=type(self).__name__), )
 
     def __missing__(self, key):
         """
@@ -87,9 +86,7 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
         """
         Returns the class associated with the specified key.
         """
-        raise NotImplementedError(
-            'Not implemented in {cls}.'.format(cls=type(self).__name__),
-        )
+        raise NotImplementedError('Not implemented in {cls}.'.format(cls=type(self).__name__), )
 
     def get(self, key, *args, **kwargs):
         """
@@ -154,9 +151,7 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
         Note: For compatibility with Python 3, this method should
         return a generator.
         """
-        raise NotImplementedError(
-            'Not implemented in {cls}.'.format(cls=type(self).__name__),
-        )
+        raise NotImplementedError('Not implemented in {cls}.'.format(cls=type(self).__name__), )
 
     def keys(self):
         # type: () -> Generator[Hashable]
@@ -184,7 +179,8 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
 
     # Add some compatibility aliases to make class registries behave
     # more like dicts in Python 2.
-    if PY2:
+    if six.PY2:
+
         def iteritems(self):
             """
             Included for compatibility with :py:data:`six.iteritems`.
@@ -207,11 +203,13 @@ class BaseRegistry(with_metaclass(ABCMeta, Mapping)):
             return self.values()
 
 
-class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
+@six.add_metaclass(ABCMeta)
+class MutableRegistry(BaseRegistry, MutableMapping):
     """
     Extends :py:class:`BaseRegistry` with methods that can be used to
     modify the registered classes.
     """
+
     def __init__(self, attr_name=None):
         # type: (Optional[Text]) -> None
         """
@@ -232,8 +230,8 @@ class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
 
     def __repr__(self):
         return '{type}({attr_name!r})'.format(
-            attr_name   = self.attr_name,
-            type        = type(self).__name__,
+            attr_name=self.attr_name,
+            type=type(self).__name__,
         )
 
     def __setitem__(self, key, class_):
@@ -277,6 +275,7 @@ class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
         def _decorator(cls):
             self._register(key, cls)
             return cls
+
         return _decorator
 
     def unregister(self, key):
@@ -301,9 +300,7 @@ class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
         """
         Registers a class with the registry.
         """
-        raise NotImplementedError(
-            'Not implemented in {cls}.'.format(cls=type(self).__name__),
-        )
+        raise NotImplementedError('Not implemented in {cls}.'.format(cls=type(self).__name__), )
 
     @abstract_method
     def _unregister(self, key):
@@ -311,10 +308,7 @@ class MutableRegistry(with_metaclass(ABCMeta, BaseRegistry, MutableMapping)):
         """
         Unregisters the class at the specified key.
         """
-        raise NotImplementedError(
-            'Not implemented in {cls}.'.format(cls=type(self).__name__),
-        )
-
+        raise NotImplementedError('Not implemented in {cls}.'.format(cls=type(self).__name__), )
 
 
 class ClassRegistry(MutableRegistry):
@@ -322,6 +316,7 @@ class ClassRegistry(MutableRegistry):
     Maintains a registry of classes and provides a generic factory for
     instantiating them.
     """
+
     def __init__(self, attr_name=None, unique=False):
         # type: (Optional[Text], bool) -> None
         """
@@ -351,9 +346,9 @@ class ClassRegistry(MutableRegistry):
 
     def __repr__(self):
         return '{type}(attr_name={attr_name!r}, unique={unique!r})'.format(
-            attr_name   = self.attr_name,
-            type        = type(self).__name__,
-            unique      = self.unique,
+            attr_name=self.attr_name,
+            type=type(self).__name__,
+            unique=self.unique,
         )
 
     def get_class(self, key):
@@ -373,7 +368,7 @@ class ClassRegistry(MutableRegistry):
         Iterates over all registered classes, in the order they were
         added.
         """
-        return iteritems(self._registry)
+        return six.iteritems(self._registry)
 
     def _register(self, key, class_):
         # type: (Hashable, type) -> None
@@ -384,18 +379,16 @@ class ClassRegistry(MutableRegistry):
             raise ValueError(
                 'Attempting to register class {cls} '
                 'with empty registry key {key!r}.'.format(
-                    cls = class_.__name__,
-                    key = key,
-                ),
-            )
+                    cls=class_.__name__,
+                    key=key,
+                ), )
 
         if self.unique and (key in self._registry):
             raise RegistryKeyError(
                 '{cls} with key {key!r} is already registered.'.format(
-                    cls = class_.__name__,
-                    key = key,
-                ),
-            )
+                    cls=class_.__name__,
+                    key=key,
+                ), )
 
         self._registry[key] = class_
 
@@ -404,12 +397,7 @@ class ClassRegistry(MutableRegistry):
         """
         Unregisters the class at the specified key.
         """
-        return (
-            self._registry.pop(key)
-                if key in self._registry
-                else self.__missing__(key)
-        )
-
+        return (self._registry.pop(key) if key in self._registry else self.__missing__(key))
 
 
 class SortedClassRegistry(ClassRegistry):
@@ -417,12 +405,14 @@ class SortedClassRegistry(ClassRegistry):
     A ClassRegistry that uses a function to determine sort order when
     iterating.
     """
+
     def __init__(
             self,
-            sort_key,                   # type: Union[Text, Callable[[Tuple[Hashable, type], Tuple[Hashable, type]], int]]
-            attr_name       = None,     # type: Optional[Text]
-            unique          = False,    # type: bool
-            reverse         = False,    # type: bool
+            # type: Union[Text, Callable[[Tuple[Hashable, type], Tuple[Hashable, type]], int]]
+            sort_key,
+            attr_name=None,  # type: Optional[Text]
+            unique=False,  # type: bool
+            reverse=False,  # type: bool
     ):
         """
         :param sort_key:
@@ -446,20 +436,16 @@ class SortedClassRegistry(ClassRegistry):
         """
         super(SortedClassRegistry, self).__init__(attr_name, unique)
 
-        self._sort_key = (
-            sort_key
-                if callable(sort_key)
-                else self.create_sorter(sort_key)
-        )
+        self._sort_key = (sort_key if callable(sort_key) else self.create_sorter(sort_key))
 
         self.reverse = reverse
 
     def items(self):
         # type: () -> Iterator[Tuple[Hashable, type]]
         return sorted(
-            iteritems(self._registry),
-                key     = self._sort_key,
-                reverse = self.reverse,
+            six.iteritems(self._registry),
+            key=self._sort_key,
+            reverse=self.reverse,
         )
 
     @staticmethod
@@ -468,6 +454,7 @@ class SortedClassRegistry(ClassRegistry):
         Given a sort key, creates a function that can be used to sort
         items when iterating over the registry.
         """
+
         def sorter(a, b):
             # type: (Tuple[Hashable, type], Tuple[Hashable, type]) -> int
             a_attr = getattr(a[1], sort_key)
