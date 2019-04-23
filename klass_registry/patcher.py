@@ -6,7 +6,7 @@ from typing import Any
 
 from six import iteritems
 
-from class_registry.registry import MutableRegistry, RegistryKeyError
+from klass_registry.registry import MutableRegistry, RegistryKeyError
 
 __all__ = [
     'RegistryPatcher',

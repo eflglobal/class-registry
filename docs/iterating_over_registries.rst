@@ -19,7 +19,7 @@ Here's an example:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry
+   from klass_registry import ClassRegistry
 
    pokedex = ClassRegistry('element')
 
@@ -60,7 +60,7 @@ If you'd like to customize this ordering, use :py:class:`SortedClassRegistry`:
 
 .. code-block:: python
 
-   from class_registry import SortedClassRegistry
+   from klass_registry import SortedClassRegistry
 
    pokedex =\
      SortedClassRegistry(attr_name='element', sort_key='weight')

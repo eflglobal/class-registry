@@ -18,7 +18,7 @@ Here's an example:
 .. code-block:: python
 
    from abc import abstractmethod
-   from class_registry import AutoRegister, ClassRegistry
+   from klass_registry import AutoRegister, ClassRegistry
    from six import with_metaclass
 
    pokedex = ClassRegistry('element')
@@ -97,7 +97,7 @@ such a purpose:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry, RegistryKeyError, \
+   from klass_registry import ClassRegistry, RegistryKeyError, \
      RegistryPatcher
 
    pokedex = ClassRegistry('element')

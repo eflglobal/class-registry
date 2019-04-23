@@ -1,12 +1,12 @@
 # coding=utf-8
-from __future__ import absolute_import, division, print_function, \
-    unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
+from test import Bulbasaur, Charmander, Charmeleon, Ivysaur, Squirtle
 from unittest import TestCase
 
-from class_registry.patcher import RegistryPatcher
-from class_registry.registry import ClassRegistry, RegistryKeyError
-from test import Bulbasaur, Charmander, Charmeleon, Ivysaur, Squirtle
+from klass_registry.patcher import RegistryPatcher
+from klass_registry.registry import ClassRegistry, RegistryKeyError
 
 
 class RegistryPatcherTestCase(TestCase):

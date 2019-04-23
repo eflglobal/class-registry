@@ -1,14 +1,14 @@
 # coding=utf-8
-from __future__ import absolute_import, division, print_function, \
-    unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from os.path import dirname
+from test import Bulbasaur, Charmander, Mew, PokemonFactory, Squirtle
 from unittest import TestCase
 
 from pkg_resources import iter_entry_points, working_set
 
-from class_registry import EntryPointClassRegistry, RegistryKeyError
-from test import Bulbasaur, Charmander, Mew, PokemonFactory, Squirtle
+from klass_registry import EntryPointClassRegistry, RegistryKeyError
 
 
 def setUpModule():
@@ -67,9 +67,7 @@ class EntryPointClassRegistryTestCase(TestCase):
 
             # Registered functions and methods can't be branded this
             # way, though...
-            self.assertFalse(
-                hasattr(PokemonFactory.create_psychic_pokemon, 'poke_type'),
-            )
+            self.assertFalse(hasattr(PokemonFactory.create_psychic_pokemon, 'poke_type'), )
 
             # ... but we can brand the resulting instances.
             self.assertEqual(registry['psychic'].poke_type, 'psychic')

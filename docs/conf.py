@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# class-registry documentation build configuration file, created by
+# klass-registry documentation build configuration file, created by
 # sphinx-quickstart on Wed Jun 28 17:10:35 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,7 +20,6 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
 
 # -- General configuration ------------------------------------------------
 
@@ -46,9 +45,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'class-registry'
-copyright = '2017, Phoenix Zerin'
-author = 'Phoenix Zerin'
+project = 'klass-registry'
+copyright = '2019, Igor Quintanilha'
+author = 'Igor Quintanilha'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -77,7 +76,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -96,12 +94,10 @@ todo_include_todos = False
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'class-registrydoc'
-
+htmlhelp_basename = 'klass-registrydoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -127,20 +123,15 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'class-registry.tex', 'class-registry Documentation',
-     'Phoenix Zerin', 'manual'),
+    (master_doc, 'klass-registry.tex', 'klass-registry Documentation', 'Igor Quintanilha',
+     'manual'),
 ]
-
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'classregistry', 'class-registry Documentation',
-     [author], 1)
-]
-
+man_pages = [(master_doc, 'classregistry', 'klass-registry Documentation', [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -148,10 +139,6 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'class-registry', 'class-registry Documentation',
-     author, 'class-registry', 'One line description of project.',
-     'Miscellaneous'),
+    (master_doc, 'klass-registry', 'klass-registry Documentation', author, 'klass-registry',
+     'One line description of project.', 'Miscellaneous'),
 ]
-
-
-

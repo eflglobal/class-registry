@@ -1,13 +1,13 @@
 # coding=utf-8
-from __future__ import absolute_import, division, print_function, \
-    unicode_literals
+from __future__ import (absolute_import, division, print_function, unicode_literals)
 
-from abc import ABCMeta, abstractmethod as abstract_method
+from abc import ABCMeta
+from abc import abstractmethod as abstract_method
 from unittest import TestCase
 
 from six import with_metaclass
 
-from class_registry import AutoRegister, ClassRegistry
+from klass_registry import AutoRegister, ClassRegistry
 
 
 class AutoRegisterTestCase(TestCase):
@@ -23,6 +23,7 @@ class AutoRegisterTestCase(TestCase):
             """
             Abstract base class; will not get registered.
             """
+
             @abstract_method
             def get_abilities(self):
                 raise NotImplementedError()
@@ -42,6 +43,7 @@ class AutoRegisterTestCase(TestCase):
             """
             Abstract subclass; will not get registered.
             """
+
             @abstract_method
             def evolve(self):
                 raise NotImplementedError()
@@ -59,10 +61,8 @@ class AutoRegisterTestCase(TestCase):
             def evolve(self):
                 return 'Congratulations! Your EKANS evolved into ARBOK!'
 
-
         self.assertListEqual(
             list(registry.items()),
-
             [
                 # Note that only non-abstract classes got registered.
                 ('ground', Sandslash),
@@ -82,7 +82,6 @@ class AutoRegisterTestCase(TestCase):
 
         self.assertListEqual(
             list(registry.items()),
-
             [
                 # :py:class:`FightingPokemon` does not define any
                 # abstract methods, so it is not considered to be

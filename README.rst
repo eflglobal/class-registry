@@ -1,7 +1,7 @@
-.. image:: https://travis-ci.org/eflglobal/class-registry.svg?branch=master
-   :target: https://travis-ci.org/eflglobal/class-registry
-.. image:: https://readthedocs.org/projects/class-registry/badge/?version=latest
-   :target: http://class-registry.readthedocs.io/
+.. image:: https://travis-ci.org/igormq/klass-registry.svg?branch=master
+   :target: https://travis-ci.org/igormq/klass-registry
+.. image:: https://readthedocs.org/projects/klass-registry/badge/?version=master
+   :target: https://klass-registry.readthedocs.io/
 
 
 =============
@@ -22,12 +22,12 @@ At the intersection of the Registry and Factory patterns lies the
 Getting Started
 ---------------
 
-Create a registry using the ``class_registry.ClassRegistry`` class, then
+Create a registry using the ``klass_registry.ClassRegistry`` class, then
 decorate any classes that you wish to register with its ``register`` method:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry
+   from klass_registry import ClassRegistry
 
    pokedex = ClassRegistry()
 
@@ -81,7 +81,7 @@ Installation
 
 Install the latest stable version via pip::
 
-   pip install class-registry
+   pip install klass-registry
 
 
 Running Unit Tests
@@ -123,6 +123,6 @@ documentation locally:
       make html
 
 
-.. _ReadTheDocs: https://class-registry.readthedocs.io/
+.. _ReadTheDocs: https://klass-registry.readthedocs.io/
 .. _detox: https://pypi.python.org/pypi/detox
 .. _tox: https://tox.readthedocs.io/

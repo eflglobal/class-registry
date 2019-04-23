@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function, \
 from abc import ABCMeta
 from inspect import isabstract as is_abstract
 
-from class_registry.registry import MutableRegistry
+from klass_registry.registry import MutableRegistry
 
 __all__ = [
     'AutoRegister',

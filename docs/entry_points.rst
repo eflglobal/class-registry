@@ -36,7 +36,7 @@ Let's see what happens once the ``pokemon-generation-2`` package is installed::
    % pip install pokemon-generation-2
    % ipython
 
-   In [1]: from class_registry import EntryPointClassRegistry
+   In [1]: from klass_registry import EntryPointClassRegistry
 
    In [2]: pokedex = EntryPointClassRegistry('pokemon')
 
@@ -70,7 +70,7 @@ registry key.
 
 .. code-block:: python
 
-   In [1]: from class_registry import EntryPointClassRegistry
+   In [1]: from klass_registry import EntryPointClassRegistry
 
    In [2]: pokedex = EntryPointClassRegistry('pokemon', attr_name='element')
 

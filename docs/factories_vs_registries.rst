@@ -19,7 +19,7 @@ Let's see what this looks like in action:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry, ClassRegistryInstanceCache
+   from klass_registry import ClassRegistry, ClassRegistryInstanceCache
 
    pokedex = ClassRegistry('element')
 

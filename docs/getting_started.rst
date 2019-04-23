@@ -3,14 +3,14 @@ Getting Started
 ===============
 
 As you saw in the :doc:`introduction </index>`, you can create a new registry
-using the :py:class:`class_registry.ClassRegistry` class.
+using the :py:class:`klass_registry.ClassRegistry` class.
 
 :py:class:`ClassRegistry` defines a ``register`` method that you can use as a
 decorator to add classes to the registry:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry
+   from klass_registry import ClassRegistry
 
    pokedex = ClassRegistry()
 
@@ -29,11 +29,11 @@ corresponding registry key:
 Note in the above example that ``sparky`` is an `instance` of ``Charizard``.
 
 If you try to access a registry key that has no classes registered, it will
-raise a :py:class:`class_registry.RegistryKeyError`:
+raise a :py:class:`klass_registry.RegistryKeyError`:
 
 .. code-block:: python
 
-   from class_registry import RegistryKeyError
+   from klass_registry import RegistryKeyError
 
    try:
      tex = pokedex['spicy']
@@ -99,7 +99,7 @@ occurs:
 
 .. code-block:: python
 
-   from class_registry import RegistryKeyError
+   from klass_registry import RegistryKeyError
 
    pokedex = ClassRegistry('element', unique=True)
 

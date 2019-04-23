@@ -18,11 +18,11 @@ with open(join(cwd, 'README.rst'), 'r', 'utf-8') as f:  # type: StreamReader
 ##
 # Off we go!
 setup(
-    name='class-registry',
+    name='klass-registry',
     description='Factory+Registry pattern for Python classes.',
-    url='https://class-registry.readthedocs.io/',
+    url='https://klass-registry.readthedocs.io/',
     version='2.1.2',
-    packages=['class_registry'],
+    packages=['klass-registry'],
     long_description=long_description,
     install_requires=[
         'six',
@@ -49,6 +49,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='registry pattern',
-    author='Phoenix Zerin',
-    author_email='phoenix.zerin@eflglobal.com',
+    author='Igor Quintanilha',
+    author_email='igormq@poli.ufrj.br',
 )

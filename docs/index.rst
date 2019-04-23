@@ -30,12 +30,12 @@ At the intersection of the Registry and Factory patterns lies the
 Getting Started
 ---------------
 
-Create a registry using the ``class_registry.ClassRegistry`` class, then
+Create a registry using the ``klass_registry.ClassRegistry`` class, then
 decorate any classes that you wish to register with its ``register`` method:
 
 .. code-block:: python
 
-   from class_registry import ClassRegistry
+   from klass_registry import ClassRegistry
 
    pokedex = ClassRegistry()
 
@@ -89,5 +89,5 @@ Installation
 
 Install the latest stable version via pip::
 
-   pip install class-registry
+   pip install klass-registry
 

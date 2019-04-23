@@ -7,7 +7,7 @@ from typing import Dict, Optional, Text
 from pkg_resources import iter_entry_points
 from six import iteritems
 
-from class_registry import BaseRegistry
+from klass_registry import BaseRegistry
 
 __all__ = [
     'EntryPointClassRegistry',

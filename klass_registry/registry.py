@@ -6,7 +6,8 @@ from abc import abstractmethod as abstract_method
 from collections import OrderedDict
 from functools import cmp_to_key
 from inspect import isclass as is_class
-from typing import Mapping, MutableMapping
+from typing import (Any, Callable, Generator, Hashable, Iterator, Mapping, MutableMapping, Optional,
+                    Text, Tuple, Union)
 
 import six
 
@@ -408,8 +409,8 @@ class SortedClassRegistry(ClassRegistry):
 
     def __init__(
             self,
-            # type: Union[Text, Callable[[Tuple[Hashable, type], Tuple[Hashable, type]], int]]
             sort_key,
+            # type: Union[Text, Callable[[Tuple[Hashable, type], Tuple[Hashable, type]], int]]
             attr_name=None,  # type: Optional[Text]
             unique=False,  # type: bool
             reverse=False,  # type: bool
