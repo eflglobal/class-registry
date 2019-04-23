@@ -73,7 +73,7 @@ For more advanced usage, check out the documentation on `ReadTheDocs`_!
 Requirements
 ------------
 
-ClassRegistry is compatible with Python versions 3.6, 3.5 and 2.7.
+ClassRegistry is compatible with Python versions 3.7, 3.6, 3.5 and 2.7.
 
 
 Installation
